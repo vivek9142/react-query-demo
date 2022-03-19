@@ -2,7 +2,7 @@ import React from 'react'
 import {useQuery} from 'react-query';
 import * as api from './usersAPI';
 
-const Users = () => {
+const Users = ({setUserId}) => {
     //this is gonna be key in a cache to retreive it later on
     // and this key will differentiate this key from other queries 
     //in the app - it will be useful for future caching, invalidating data and stuff
@@ -32,7 +32,10 @@ const Users = () => {
     <div>
         <ul>
             {data?.map(user => (
-                <li key={user.id}>{user.name}</li>
+                <li key={user.id}>
+                    {user.name}
+                    <button onClick={()=>setUserId(user.id)}>View</button>
+                </li>
             ))}
         </ul>
     </div>

@@ -1,5 +1,10 @@
 .App {
+  background: #1f262d;
+  color: white;
+  width: 100vw;
   text-align: center;
+  display: flex;
+  height: 100vh;
 }
 
 .App-logo {
