@@ -1,8 +1,10 @@
-import React from "react";
+import React,{useState} from "react";
 import { useQuery } from "react-query";
+import UserForm from "./UserForm";
 import * as api from "./usersAPI";
 
 const UserDetails = ({ userId }) => {
+    const [isEditing,setIsEditing] = useState(false);
   /*
     We're gonna set key as something which will uniquely identify this key in queries so 
     here we'll try to use array here (allowed in query) ['user',userId] - so the user and userId 
@@ -38,9 +40,19 @@ const UserDetails = ({ userId }) => {
   return (
     <div>
         {isFetching && 'Background Refetcing.....'}
-      <h2>{user.name}</h2>
-      <p>Phone: {user.phone}</p>
-      <p>Website: {user.website}</p>
+      
+      <button onClick={()=> setIsEditing(!isEditing)}>
+        {isEditing ? 'CANCEL' : 'EDIT'}
+      </button>
+      {isEditing ? (
+          <UserForm user={user} setIsEditing={setIsEditing}/>
+      ):(
+        <div>
+            <h2>{user.name}</h2>
+            <p>Phone: {user.phone}</p>
+            <p>Website: {user.website}</p>
+        </div>
+      )}
     </div>
   );
 };
